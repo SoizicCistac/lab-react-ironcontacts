@@ -17,12 +17,22 @@ function App() {
   }
 
   const sortPopularity = () => {
-    const sortedPopularity = contacts.slice().sort((a, b) => {return b.popularity - a.popularity})
+    const contactArray = [...contacts]
+    const sortedPopularity = contactArray.sort((a, b) => {return b.popularity - a.popularity})
     setContacts(sortedPopularity)
   }
 
   const sortName = () => {
+    const contactArray = [...contacts]
+    contactArray.sort((a, b) => {
+      if(a.name>b.name){
+        return 1;
+      } else if (a.name<b.name) {
+        return -1;
+      }
+    })
 
+    setContacts(contactArray)
   }
 
   const handleDelete = (id) => {
@@ -43,6 +53,7 @@ function App() {
           <th>Popularity</th>
           <th>Won Oscar</th>
           <th>Won Emmy</th>
+          <th>Delete</th>
         </thead>
         <tbody>
           {contacts.map(contact => {
